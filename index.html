@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>INTEGRATED FLOOD WARNING SYSTEM</title>
+
+    <!-- Prevent the demo from appearing in search engines -->
+    <meta name="robots" content="noindex">
+
+    <!-- Perfect Scrollbar -->
+    <link type="text/css" href="assets/vendor/perfect-scrollbar.css" rel="stylesheet">
+
+    <!-- Fix Footer CSS -->
+    <link type="text/css" href="assets/vendor/fix-footer.css" rel="stylesheet">
+
+    <!-- Material Design Icons -->
+    <link type="text/css" href="assets/css/material-icons.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link type="text/css" href="assets/css/fontawesome.css" rel="stylesheet">
+
+    <!-- Preloader -->
+    <link type="text/css" href="assets/css/preloader.css" rel="stylesheet">
+
+    <!-- App CSS -->
+    <link type="text/css" href="assets/css/app.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+
+</head>
+
+<body class="layout-navbar-mini">
+
+    <div class="preloader">
+        <div class="sk-double-bounce">
+            <div class="sk-child sk-double-bounce1"></div>
+            <div class="sk-child sk-double-bounce2"></div>
+        </div>
+    </div>
+
+    <!-- Header Layout -->
+    <div class="mdk-header-layout js-mdk-header-layout">
+
+        <!-- Header -->
+
+        <div id="header" class="mdk-header bg-dark js-mdk-header mb-0" data-effects="waterfall blend-background"
+            data-fixed data-condenses>
+            <div class="mdk-header__content">
+
+                <div class="navbar navbar-expand-sm navbar-dark bg-dark pr-0 pr-md-16pt" id="default-navbar"
+                    data-primary>
+
+                    <!-- Navbar toggler -->
+                    <button class="navbar-toggler navbar-toggler-right d-block d-md-none" type="button"
+                        data-toggle="sidebar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Navbar Brand -->
+                    <a href="index.html" class="navbar-brand">
+                        <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/faticon.png" width="30"
+                            alt="INTEGRATED FLOOD WARNING SYSTEM ">
+                        <span class="d-none d-md-block">INTEGRATED FLOOD WARNING SYSTEM</span>
+                    </a>
+
+
+                    <!-- Main Navigation -->
+
+                    <ul class="nav navbar-nav ml-auto flex-nowrap" style="white-space: nowrap;">
+
+                        <li class="d-none d-sm-flex nav-item">
+                            <a href="pricing.html" class="btn btn-secondary btn-rounded">Beranda</a>
+                        </li>
+                        <li class="d-none d-sm-flex nav-item">
+                            <a href="pricing.html" class="btn btn-primary btn-rounded">Statistik</a>
+                        </li>
+                        <li class="d-none d-sm-flex nav-item">
+                            <a href="https://smartfws.herokuapp.com/docs" class="btn btn-accent btn-rounded">openAPI</a>
+                        </li>
+                        <li class="d-none d-sm-flex nav-item">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-warning btn-rounded dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">UI</button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="ui-buttons.html">Buttons</a>
+                                    <a class="dropdown-item" href="ui-charts.html">Charts</a>
+                                    <a class="dropdown-item" href="ui-avatars.html">Avatars</a>
+                                    <a class="dropdown-item" href="ui-forms.html">Forms</a>
+                                    <a class="dropdown-item" href="ui-loaders.html">Loaders</a>
+                                    <a class="dropdown-item" href="ui-tables.html">Tables</a>
+                                    <a class="dropdown-item" href="ui-cards.html">Cards</a>
+                                    <a class="dropdown-item" href="ui-icons.html">Icons</a>
+                                    <a class="dropdown-item" href="ui-tabs.html">Tabs</a>
+                                    <a class="dropdown-item" href="ui-alerts.html">Alerts</a>
+                                    <a class="dropdown-item" href="ui-badges.html">Badges</a>
+                                    <a class="dropdown-item" href="ui-progress.html">Progress</a>
+                                    <a class="dropdown-item" href="ui-pagination.html">Pagination</a>
+                                </div>
+                              </div>
+                        </li>
+                        
+                        <li class="ml-16pt nav-item">
+                            <a href="login.html" class="nav-link">
+                                <i class="material-icons">lock_open</i>
+                                <span class="sr-only">Login</span>
+                            </a>
+                        </li>
+                    </ul>
+
+
+
+                    <!-- // END Main Navigation -->
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- // END Header -->
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content page-content ">
+            <div class="mdk-box mdk-box--bg-gradient-primary bg-dark js-mdk-box position-relative overflow-hidden mb-0"
+                data-effects="parallax-background blend-background">
+                <div class="mdk-box__bg">
+                    <div class="mdk-box__bg-front"></div>
+                </div>
+                <div class="mdk-box__content">
+                    <div class="container page__container text-center py-64pt py-md-64pt">
+                        <div class="alert alert-light border-1 border-left-4 border-left-accent" role="alert">
+                            <strong>Well done!</strong>
+                            You successfully read this important alert message.
+                          </div>
+                        <div id="map" class="mb-16pt"></div>
+                        <button type="button" class="btn btn-accent btn-rounded">Get Data</button>
+                    </div>
+                    <!-- <div class="hero container text-center py-112pt">
+      <h1 class="text-white">Learn to Code</h1>
+      <p class="lead measure-hero-lead mx-auto mb-48pt text-white">Business, Technology and Creative Skills taught by industry experts. Explore a wide range of skills with our professional tutorials.</p>
+      <a href="library.html" class="btn btn-lg btn-outline-white">Browse Courses</a>
+    </div> -->
+                </div>
+            </div>
+
+            <div class="bg-white border-bottom-2 py-16pt py-sm-24pt py-md-32pt ">
+                <div class="container page__container">
+                    <h2>Fitur Utama Layanan</h2>
+                    <div class="row align-items-center">
+
+                        <div
+                            class="d-flex col-md align-items-center border-bottom border-md-0 mb-16pt mb-md-0 pb-16pt pb-md-0">
+                            <div
+                                class="rounded-circle bg-primary w-64 h-64 d-inline-flex align-items-center justify-content-center mr-16pt">
+                                <i class="material-icons text-primary-light">subscriptions</i>
+                            </div>
+                            <div class="flex">
+                                <p class="mb-0"><strong>8,000+ Courses</strong></p>
+                                <p class="text-black-70 mb-0">Explore a wide range of skills.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="d-flex col-md align-items-center border-bottom border-md-0 mb-16pt mb-md-0 pb-16pt pb-md-0">
+                            <div
+                                class="rounded-circle bg-primary w-64 h-64 d-inline-flex align-items-center justify-content-center mr-16pt">
+                                <i class="material-icons text-primary-light">verified_user</i>
+                            </div>
+                            <div class="flex">
+                                <p class="mb-0"><strong>By Industry Experts</strong></p>
+                                <p class="text-black-70 mb-0">Professional development from the best people.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex col-md align-items-center">
+                            <div
+                                class="rounded-circle bg-primary w-64 h-64 d-inline-flex align-items-center justify-content-center mr-16pt">
+                                <i class="material-icons text-primary-light">update</i>
+                            </div>
+                            <div class="flex">
+                                <p class="mb-0"><strong>Unlimited Access</strong></p>
+                                <p class="text-black-70 mb-0">Unlock Library and learn any topic with one subscription.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container page__container py-sm-24pt py32pt">
+                <div class="page-headline text-center">
+                    <h2>Daftar Layanan</h2>
+                    <p class="lead text-70 measure-lead mx-auto">Berikut layanan yang disajikan untuk membantu memprediksi daerah banjir</p>
+                </div>
+                <div class="card-columns">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Sumber Berita</h4>
+                            <div id="widgetmain"
+                                style="text-align:left;overflow-y:auto;overflow-x:hidden;width:100%;background-color:#transparent; border:0px solid #333333;">
+                                <div id="rsswidget" style="height:300px;"><iframe
+                                        src="http://us1.rssfeedwidget.com/getrss.php?time=1587320879568&amp;x=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fum%3D1%26hl%3Did%26q%3Dbanjir%2Bbandung%26gl%3DID%26ceid%3DID%3Aid&amp;w=100%&amp;h=300&amp;bc=333333&amp;bw=0&amp;bgc=transparent&amp;m=10&amp;it=false&amp;t=Sumber Berita&amp;tc=FFFFFF&amp;ts=19&amp;tb=1F1F1F&amp;il=true&amp;lc=E83F3F&amp;ls=18&amp;lb=true&amp;id=true&amp;dc=333333&amp;ds=16&amp;idt=true&amp;dtc=284F2D&amp;dts=12"
+                                        border="0" hspace="0" vspace="0" frameborder="no" marginwidth="0"
+                                        marginheight="0"
+                                        style="border:0; padding:0; margin:0; width:100%; height:300px;"
+                                        id="rssOutput">Info Terkini</iframe></div>
+                                <div style="text-align:right;margin-bottom:0;border-top:0px solid #333333;"
+                                    id="widgetbottom"><span style="font-size:70%"><a
+                                            href="http://www.rssfeedwidget.com">Lihat Selengkapnya</a>&nbsp;</span><br>
+                                </div>
+                            </div>
+                            <p class="text-70">
+                                <small class="text-muted">Last updated 1 mins ago</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Penyebaran Berita</h4>
+                            <p class="text-70">Penyebaran Terakhir </p>
+                            <p class="text-70">
+                                <small class="text-muted">Last updated 3 mins ago</small>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Frekuensi Siaga <span class="badge badge-pill badge-danger">1
+                                    Waspada</span></h4>
+                            <div class="alert alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>Primary - </strong> A simple primary alert - check it out!
+                            </div>
+                            <div class="alert alert-dismissible bg-warning text-white border-0 fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>Secondary - </strong> A simple primary alert - check it out!
+                            </div>
+                            <div class="alert alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>Primary - </strong> A simple primary alert - check it out!
+                            </div>
+                            <p class="text-70">
+                                <small class="text-muted">Last updated 3 mins ago</small>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Status Sensor</h4>
+                            <div class="alert alert-accent" role="alert">
+                                <strong>Well done!</strong>
+                                You successfully read this important alert message.
+                              </div>
+
+                              <div class="alert alert-accent" role="alert">
+                                <strong>Well done!</strong>
+                                You successfully read this important alert message.
+                              </div>
+                        
+                        
+                            <p class="text-70">
+                                <small class="text-muted">Last updated 3 mins ago</small>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Prediksi Cuaca Harian</h4>
+                            <a class="weatherwidget-io" href="https://forecast7.com/en/n6d92107d62/bandung/" data-label_1="Prediksi Cuaca" data-label_2="Kota Bandung" data-theme="original" >Prediksi Cuaca Kota Bandung</a>
+                                <script>
+                                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                                </script>
+                                <small class="text-muted">Last updated 3 mins ago</small>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container page__container">
+                <div class="card text-center">
+                    <div class="card-header">
+                      <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#">Active</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link disabled" href="#">Disabled</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">Special title treatment</h5>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="page-section border-bottom-2">
+                <div class="container">
+                    <div class="page-headline text-center">
+                        <h2>Aduan Terkini</h2>
+                        <p class="lead text-70 measure-lead mx-auto">Partisipasi Mereka Membantu Pengembangan Sistem Layanan ini</p>
+                    </div>
+
+                    <div class="position-relative carousel-card">
+                        <div class="row d-block js-mdk-carousel" id="carousel-feedback" data-interval="3000" style="overflow: hidden;" data-domfactory-upgraded="mdk-carousel">
+                            <a class="carousel-control-next js-mdk-carousel-control mt-n24pt" href="#carousel-feedback" role="button" data-slide="next" data-domfactory-upgraded="mdk-carousel-control">
+                                <span class="carousel-control-icon material-icons" aria-hidden="true">keyboard_arrow_right</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                            <div class="mdk-carousel__content" style="transition-duration: 0ms; width: 696px;">
+
+                                <div class="col-12 col-md-6 mdk-carousel__item" style="width: 348px;">
+                                    <div class="card card--elevated card-body">
+                                        <blockquote class="mb-0">
+                                            <p class="text-70">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia distinctio reiciendis iusto id, doloribus optio soluta laborum nobis dolor tempore velit porro maiores eveniet voluptas officia ipsa magnam aliquam. Perferendis?</p>
+
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img src="assets/images/people/110/guy-1.jpg" width="40" alt="avatar" class="rounded-circle">
+                                                </div>
+                                                <div class="media-body media-middle">
+                                                    <p class="mb-0"><a href="" class="text-body"><strong>Umberto Kass</strong></a></p>
+                                                    <div class="rating">
+                                                        <span class="rating__item"><span class="material-icons">star</span></span>
+                                                        <span class="rating__item"><span class="material-icons">star</span></span>
+                                                        <span class="rating__item"><span class="material-icons">star</span></span>
+                                                        <span class="rating__item"><span class="material-icons">star</span></span>
+                                                        <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </blockquote>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 mdk-carousel__item" style="width: 348px;">
+                                    <div class="card card--elevated card-body">
+                                        <blockquote class="mb-0">
+                                            <p class="text-70">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia distinctio reiciendis iusto id, doloribus optio soluta laborum nobis dolor tempore velit porro maiores eveniet voluptas officia ipsa magnam aliquam. Perferendis?</p>
+
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img src="assets/images/people/110/guy-2.jpg" width="40" alt="avatar" class="rounded-circle">
+                                                </div>
+                                                <div class="media-body media-middle">
+                                                    <p class="mb-0"><a href="" class="text-body"><strong>Umberto Kass</strong></a></p>
+                                                    <div class="rating">
+                                                        <span class="rating__item"><span class="material-icons">star</span></span>
+                                                        <span class="rating__item"><span class="material-icons">star</span></span>
+                                                        <span class="rating__item"><span class="material-icons">star</span></span>
+                                                        <span class="rating__item"><span class="material-icons">star</span></span>
+                                                        <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </blockquote>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-footer page-section py-lg-32pt">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-4 mb-24pt mb-md-0">
+                            <p class="text-white-70 mb-8pt"><strong>Follow us</strong></p>
+                            <nav class="nav nav-links nav--flush">
+                                <a href="#" class="nav-link mr-8pt"><img src="assets/images/icon/footer/facebook-square@2x.png" width="24" height="24" alt="Facebook"></a>
+                                <a href="#" class="nav-link mr-8pt"><img src="assets/images/icon/footer/twitter-square@2x.png" width="24" height="24" alt="Twitter"></a>
+                                <a href="#" class="nav-link"><img src="assets/images/icon/footer/youtube-square@2x.png" width="24" height="24" alt="YouTube"></a>
+                            </nav>
+                        </div>
+                        <div class="col-md-6 col-sm-4 mb-24pt mb-md-0 d-flex align-items-center">
+                            <p class="text-white-50 mb-0">NINON NURUL FAIZA (23219037) - WIRA JUNARDI (23219054)-JM. IHZA MAHENDRA (23219336)
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-md-right">
+                            <p class="mb-8pt d-flex align-items-md-center justify-content-md-end">
+                                <a href="" class="text-white-70 text-underline mr-16pt">Terms</a>
+                                <a href="" class="text-white-70 text-underline">Privacy policy</a>
+                            </p>
+                            <p class="text-white-50 mb-0">Copyright 2020 &copy; All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- // END Header Layout Content -->
+
+    </div>
+    <!-- // END Header Layout -->
+
+    <!-- drawer -->
+    <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+        <div class="mdk-drawer__content">
+            <div class="sidebar sidebar-dark sidebar-left" data-perfect-scrollbar>
+                <div class="sidebar-p-a sidebar-b-b sidebar-m-b pt-0">
+
+                    <!-- Brand -->
+                    <a href="index.html" class="sidebar-brand">
+                        <img class="sidebar-brand-icon" src="assets/images/faticon.png" width="30"
+                            alt="INTEGRATED FLOOD WARNING SYSTEM ">
+                        <span>IFWS</span>
+                    </a>
+                    <!-- // END Brand -->
+
+                    <!-- Search -->
+                    <form action="library-filters.html" class="search-form search-form--black">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
+                    </form>
+
+                </div>
+
+                <div class="sidebar-heading">Layanan</div>
+                <ul class="sidebar-menu">
+                    <li class="sidebar-menu-item active">
+                        <a class="sidebar-menu-button" href="index.html">Menagemen Penguna</a>
+                    </li>
+                    <li class="sidebar-menu-item active">
+                        <a class="sidebar-menu-button" href="index.html">Menagemen Perangkat</a>
+                    </li>
+                    <li class="sidebar-menu-item active">
+                        <a class="sidebar-menu-button" href="index.html">Menagemen Berita</a>
+                    </li>
+                    <li class="sidebar-menu-item active">
+                        <a class="sidebar-menu-button" href="index.html">Penyebaran Informasi</a>
+                    </li>
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- // END drawer -->
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/vendor/popper.min.js"></script>
+    <script src="assets/vendor/bootstrap.min.js"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script src="assets/vendor/perfect-scrollbar.min.js"></script>
+
+    <!-- DOM Factory -->
+    <script src="assets/vendor/dom-factory.js"></script>
+
+    <!-- MDK -->
+    <script src="assets/vendor/material-design-kit.js"></script>
+
+    <!-- Fix Footer -->
+    <script src="assets/vendor/fix-footer.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.min.js"></script>
+
+    <!-- App JS -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Highlight.js -->
+    <script src="assets/js/hljs.js"></script>
+
+    <script>
+        var map = L.map('map', {
+            center: [-6.9377509,107.5733948],
+            zoom: 13
+        });
+
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        $.getJSON("bandung.geojson",function(data){
+        // L.geoJson function is used to parse geojson file and load on to map
+        L.geoJson(data).addTo(map);
+        });
+
+    </script>
+
+</body>
+
+</html>
